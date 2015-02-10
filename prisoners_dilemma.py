@@ -580,8 +580,20 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 			else:
 				return 'c' #otherwise collude
 	
-	
 
+
+	
+	elif player == 20:
+		pattern = ['cbbcbb', 'bbcbbc', 'cbcb', 'bcbc', 'cbb'] # Define pattern recognition search strings.
+		if getting_team_name:
+			return 'bobbyluig'
+		else:
+			if len(opponent_history)==0:
+				return 'c' # Collude first.
+			elif len(history) > 3 and any(x in opponent_history for x in pattern):
+				return 'b' # On pattern find, gain points by betraying all the time.
+			else:
+				return opponent_history[-1] # Play the statistically safest way to win.
 
 
 
@@ -725,3 +737,4 @@ def play_tournament(num_players):
 			   str(int(scores[player])/num_players) , ' points: ',
 			   team_names[player])
 	
+play_tournament(21)
