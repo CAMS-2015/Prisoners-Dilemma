@@ -595,17 +595,16 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 			else:
 				return opponent_history[-1] # Play the statistically safest way to win.
 
-        elif player == 21:
-            if getting_team_name:
-                return 'Tavio&Sebastian'
-            else:
-                if len(opponent_history)==0:
-                    return 'c'
-                elif len(opponent_history)>3:
-                    if 'ccb' in opponent_history:
-                        return 'b'
-                else:
-                    return opponent_history[-1]
+	elif player == 21:
+		if getting_team_name:
+			return 'Tavio&Sebastian'
+		else:
+			if len(opponent_history)==0:
+				return 'c'
+			elif len(opponent_history)>3 and 'ccb' in opponent_history:
+				return 'b'
+			else:
+				return opponent_history[-1]
 
 
 
