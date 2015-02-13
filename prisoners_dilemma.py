@@ -276,18 +276,26 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
     ######
     ######       
     #
+	#Kevin Khoa Pho and Bryan Mijares
     elif player == 7:
         if getting_team_name:
-            return 'loyal vengeful'
+            return "logical]Kevin Khoa Pho and Bryan Mijares"
         else:
-            # use history, opponent_history, score, opponent_score
-            # to compute your strategy
-            if len(opponent_history)==0: #It's the first round: collude
-                return 'c'
-            elif history[-1]=='c' and opponent_history[-1]=='b':
-                return 'b' # betray is they were sucker last time
+            if len(history) == 0: # Start with "bad" to backstab "collude"
+                return "c"
             else:
-                return 'c' #otherwise collude
+                globalcount = len(history)  # Start the pattern
+                if globalcount < 6: # For the first 6, try "cbbcbb" to test classification
+                    if globalcount%3 == 0: # Tests every 3 (at first), be "good"
+                        return "c"
+                    else:
+                        return "b" # Be "bad" every other time
+                if globalcount >= 6: # After the testing period
+                    enemy = predict(history,opponent_history) # Predict the enemy type (in case not given)
+                    guess = logic(history,opponent_history,enemy) # Use logic on the enemy
+                    return guess
+                else:
+                    return "c" # Otherwise be "good"
 
 
 
@@ -752,3 +760,45 @@ def play_tournament(num_players):
                str(int(scores[player])/num_players) , ' points: ',
                team_names[player])
     
+#Kevin Khoa Pho and Bryan Mijares: Dependencies
+def predict(values1,values2):
+    length = len(values1) # Get the amount of actions
+    if values2[0:6] == "cccccc": # If all the actions are "good", then the enemy is loyal/second
+        return "loyal"
+    elif values2[0:6] == "bbbbbb": # If all the actions are "bad", then the enemy is backstabbing
+        return "backstabber"
+    token = "" # Lexically record the actions
+    previous1 = "" # Player's most recent
+    previous2 = "" # Enemy's most recent
+    for inc in range(length): # Get a counter
+        token += values2[inc] # Record the enemy's action
+        if token == "cbbbbb": # If the total is "cbbbbb", then the enemy is second (good, then sticking with bad)
+            token = ""
+            return "second"
+        elif token == "cbbcbb": # If the total is "cbbcbb", then the enemy is third (good every third, including the first)
+            token = ""
+            return "third"
+        else:
+            if previous1 == "b" and previous2 == "c" and values2[inc] == "b": # If the enemy reacts to a successful backstab with a backstab, then clear the previous, and the enemy is vengeful
+                if values1[inc] == "c" and values2[inc] == "b": # If the enemy randomly backstabs, then the enemy is greedy
+                    return "greedy"
+                previous1 = ""
+                previous2 = ""
+                return "vengeful"
+        previous1 = values1[inc] # Current actions become the previous
+        previous2 = values2[inc]
+    return "greedy" # Otherwise, the enemy is greedy
+def logic(values1,values2,player):
+    length = len(values1) # Get the amount of actions
+    if player == "loyal" or player == "backstabber" or player == "second" or player == "third": # If the enemy is one of these, then backstab
+        # loyal: can continually punish the enemy
+        # backstabber: can continually reduce a backstab
+        # second: can continually punish the enemy or reduce a backstab
+        # third: can continually punish the enemy or reduce a backstab
+        return "b"
+    elif player == "vengeful" or player == "greedy": # Procedure
+        # vengeful: be "good" # continually backstabbing yields a net loss
+        # greedy: be "good" # continually backstabbing yields a net loss
+        return "c"
+    # Otherwise, be "good"
+    return "c"
