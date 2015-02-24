@@ -276,6 +276,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 	######	   
 	#
 	#Kevin Khoa Pho and Bryan Mijares
+	#Verified by Bryan Mijares
 	elif player == 7:
 		if getting_team_name:
 			return "logical]Kevin Khoa Pho and Bryan Mijares"
