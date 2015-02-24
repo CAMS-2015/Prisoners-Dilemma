@@ -533,7 +533,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 	#
 	elif player == 16:
 		if getting_team_name:
-			return 'loyal vengeful'
+			return 'Stephanie Becerra'
 		else:
 			if len(opponent_history)==0: #It's the first round: collude
 				return 'c'
