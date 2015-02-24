@@ -250,17 +250,23 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 	######		
 	#
 	elif player == 6:
-		if getting_team_name:
-			return 'loyal vengeful'
-		else:
+	       if getting_team_name:
+	           return 'Geometry: Daniel Monge, Nathan Obrique '
+	       else:
 			# use history, opponent_history, score, opponent_score
 			# to compute your strategy
-			if len(opponent_history)==0: #It's the first round: collude
-				return 'c'
-			elif history[-1]=='c' and opponent_history[-1]=='b':
-				return 'b' # betray is they were severely punished last time
-			else:
-				return 'c' #otherwise collude
+		  if len(opponent_history)==0: #It's the first round: collude
+		      return 'c'
+		  elif history[-1]=='c' and opponent_history[-1]=='b':
+		      return 'b' # betray if I lost points
+		  elif history[-1]=='c' and opponent_history[-1]=='c': #c if nothing happened
+		      return 'c'
+		  elif history[-1]=='b' and opponent_history[-1]=='c': #b if awarded
+		      return 'b'
+		  elif history[-1]=='b' and opponent_history[-1]=='b': #b if both punished
+		      return 'b'     
+		  else:
+		      return 'c' #otherwise collude
 	
 
 
