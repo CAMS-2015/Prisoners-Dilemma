@@ -683,8 +683,18 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                         		return 'b'
                 	else:
                     		return opponent_history[-1]
-
-
+                    	
+       	elif player == 28:
+		if getting_team_name:
+                	return 'SeanandEmily'
+            	else:
+                	if len(opponent_history)==0:
+                    		return 'c'
+                	elif len(opponent_history)>3:
+                    		if 'ccb' in opponent_history:
+                        		return 'b'
+                	else:
+                    		return opponent_history[-1]
 
 
 
