@@ -233,10 +233,10 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 			
 			if len(opponent_history)==0: 
 				return 'c'
-			elif history[-1]=='b' and opponent_history[-1]=='c':
-				return 'c' 
+			elif history[-1]=='b' and opponent_history[-1]=='c': #history
+				return 'c' #if we betrayed and they tried to collude we would collude next turn
 			else:
-				return 'b' #cus i can
+				return 'b' #if they tried to betray we will betray
 	
 	
 	
