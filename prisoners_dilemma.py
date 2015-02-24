@@ -623,7 +623,20 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 			elif len(history) > 3 and any(x in opponent_history for x in pattern):
 				return 'b' # On pattern find, gain points by betraying all the time.
 			else:
-				return opponent_history[-1] # Play the statistically safest way to win.   
+				return opponent_history[-1] # Play the statistically safest way to win.  
+	
+	elif player == 24:
+        if getting_team_name:
+            return 'SRamachandran'
+        else:
+            if len(opponent_history)==0: 
+                return 'c'
+            elif history[-1]=='c' and opponent_history[-1]=='b'or history[-1]=='b' and opponent_history[-1]=='b':
+                return 'b' 
+            else:
+                return 'c' 
+            
+    
 	
 
 
