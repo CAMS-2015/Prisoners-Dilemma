@@ -236,7 +236,7 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 			elif history[-1]=='b' and opponent_history[-1]=='c':
 				return 'c' 
 			else:
-				return 'b' 
+				return 'b' #cus i can
 	
 	
 	
