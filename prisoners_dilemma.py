@@ -404,16 +404,28 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 	#
 	elif player == 11:
 		if getting_team_name:
-			return 'loyal vengeful'
+			return 'RUBEN SQUAD'
 		else:
 			# use history, opponent_history, score, opponent_score
 			# to compute your strategy
 			if len(opponent_history)==0: #It's the first round: collude
-				return 'c'
+				return 'b'
 			elif history[-1]=='c' and opponent_history[-1]=='b':
 				return 'b' # betray is they were severely punished last time
+			elif history[-1]=='b' and opponent_history[-1]=='b':
+			        return 'c' #try to be friendly
+			elif opponent_history[-1] == 'b':
+			        return 'b' #Alliance did not work
+			elif opponent_history[-1] == 'c':
+			        return 'b'# backstab the traitor when confidence is gained.
+			elif opponent_history[-1] == 'ccbccb':
+			        return 'b' # player backstabbing on third turn
+			elif opponent_history[-1] == 'cbcbcb':
+			        return 'b' #player backstabbing on second turn
 			else:
 				return 'c' #otherwise collude
+			 
+			        
 
 
 
