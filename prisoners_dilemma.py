@@ -275,7 +275,8 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
 	######
 	######	   
 	#
-	#Kevin Khoa Pho and Bryan Mijares
+	# Kevin Khoa Pho and Bryan Mijares
+	# Verification: Bryan Mijares
 	elif player == 7:
 		if getting_team_name:
 			return "logical]Kevin Khoa Pho and Bryan Mijares"
@@ -844,7 +845,7 @@ def logic(values1,values2,player):
 		# vengeful: be "good" # continually backstabbing yields a net loss
 		# greedy: be "good" # continually backstabbing yields a net loss
 		return "c"
-	# Otherwise, be "good"
-	return "c"
+	# Otherwise, be "bad"
+	return "b" # Bryan Mijares - Prevents backstabs
 
 play_tournament(24)
