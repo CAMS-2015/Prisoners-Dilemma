@@ -714,6 +714,14 @@ def get_action(player, history, opponent_history, score, opponent_score, getting
                 	else:
                     		return opponent_history[-1]
 
+	elif player == 29:
+		if getting_team_name:
+			return "ONYOKO!!!!!"
+		else:
+			if opponent_history == 0:
+				return "c"
+			else:
+				return opponent_history[-1]
 
 
 
